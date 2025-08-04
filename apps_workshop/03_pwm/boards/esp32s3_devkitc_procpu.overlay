@@ -1,0 +1,35 @@
+#include <zephyr/dt-bindings/pwm/pwm.h>
+/ {
+	aliases {
+		myled = &yellow_led;
+	};
+
+	my-pwm-leds {
+		compatible = "pwm-leds";
+		yellow_led: pwm_led0 {
+			    pwms = <&ledc0 0 1000 PWM_POLARITY_NORMAL>;
+		};
+	};
+};
+
+&ledc0 {
+    pinctrl-0 = <&ledctrl_0>;
+	pinctrl-names = "default";
+    status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	
+	channel0@0 {
+	    reg = <0x0>;
+		timer = <0>;
+	};
+};
+ 
+&pinctrl {
+        ledctrl_0: myled {
+	        group1 {
+		        pinmux = <LEDC_CH0_GPIO7>;
+			output-enable;
+		};
+	};
+};

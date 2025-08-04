@@ -1,0 +1,16 @@
+/{
+	aliases{
+		my-led=&yellow_led;
+		my-timer = &timer0;
+	};
+	leds{
+		compatible = "gpio-leds";
+		yellow_led: led1 {
+			gpios=<&gpio0 7 GPIO_ACTIVE_HIGH>;
+			label="Moja dioda";
+		};
+	};
+};
+&timer0 {
+    status = "okay";
+};
